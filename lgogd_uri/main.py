@@ -423,12 +423,13 @@ class Application(dbus.service.Object):  # pylint: disable=C0111,R0902
         path = treeview.get_path_at_pos(int(event.x), int(event.y))
         selection = treeview.get_selection()
         rows = selection.get_selected_rows()
-        if path[0] not in rows[1]:
-            selection.unselect_all()
-            selection.select_path(path[0])
+        if path:
+            if path[0] not in rows[1]:
+                selection.unselect_all()
+                selection.select_path(path[0])
 
-        self.builder.get_object("popup_dlqueue").popup(
-            None, None, None, btn, time)
+            self.builder.get_object("popup_dlqueue").popup(
+                None, None, None, btn, time)
         return True
 
     # pylint: disable=no-self-use
